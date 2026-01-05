@@ -56,3 +56,23 @@ let arr = ["Bhavesh", "Hina"]
 arr.forEach( a => {
     console.log(a)
 })
+
+
+/**
+ * map() method
+ */
+
+let number = [5,6,7,8]
+
+let value = number.map(a=>a*2)
+console.log(value)
+console.log(number)
+
+
+/**
+ * filter()
+ */
+
+let n = [ 10, 20, 3, 6]
+let findMoreThan10 = n.filter(n=>n > 10)
+console.log(findMoreThan10)
