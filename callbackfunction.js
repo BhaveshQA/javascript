@@ -93,6 +93,12 @@ itemPrice.forEach(price =>{
 } )
 
 
+
+const users = ["admin", "guest", "editor"]
+
+users.forEach(user => {
+    console.log(`validate user : ${user}`)
+})
 console.log("-------------------------------------------------")
 
 /**
@@ -112,7 +118,7 @@ console.log("----------------------------------------------")
  * fiter with callback
  */
 
-const numbers = [10, 20, 25, 9, 1]
+const marks = [45, 60, 30, 80]
 
-const minNumber = numbers.filter(n=> n <= 1)
-console.log(minNumber)
+const marksgraterthan50 = marks.filter(n=> n >= 50)
+console.log(marksgraterthan50)
