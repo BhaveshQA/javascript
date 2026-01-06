@@ -107,10 +107,10 @@ console.log("-------------------------------------------------")
 
 const price = ["R100","R200"]
 
-const numberPrice = price.map(p=>Number(p.replace("R",""))
+const numberPrice1 = price.map(p=>Number(p.replace("R",""))
 )
 
-console.log(numberPrice)
+console.log(numberPrice1)
 
 console.log("----------------------------------------------")
 
