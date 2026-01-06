@@ -76,3 +76,43 @@ function callPrintNameFunction(items, callback){
 }
 
 callPrintNameFunction(["ItemA","ItemB"],printItemName)
+console.log("----------------------------------------")
+
+/**
+ * CALLBACKS USED IN AUTOMATION
+ * Array method callback
+ * here price =>{} is callback function inside forEach method
+ */
+
+console.log("Array method callback in automation")
+
+const itemPrice = [250,400,300]
+
+itemPrice.forEach(price =>{
+    console.log(`Validate price ${price}`)
+} )
+
+
+console.log("-------------------------------------------------")
+
+/**
+ * map with callback 
+ */
+
+const price = ["R100","R200"]
+
+const numberPrice = price.map(p=>Number(p.replace("R",""))
+)
+
+console.log(numberPrice)
+
+console.log("----------------------------------------------")
+
+/**
+ * fiter with callback
+ */
+
+const numbers = [10, 20, 25, 9, 1]
+
+const minNumber = numbers.filter(n=> n <= 1)
+console.log(minNumber)
