@@ -77,6 +77,10 @@ run()
 
 /**
  * Rule 4 :When use await then error handle using try/catch block
+ * In async/await, errors must happen inside the try block, either by:
+   a rejected promise (await promise)
+   or throw new Error()
+   Only then will catch run.
  */
 
 function checkError(){
@@ -87,11 +91,12 @@ function checkError(){
 
 async function errorMessage(){
 try{
-    console.log("User Online and record")
+    const result = await checkError()
+    console.log(result)
 }
-catch{
-    const error = await checkError()
-    console.log(error)
+catch(error){
+    
+   console.log(error)
 }
 }
 
