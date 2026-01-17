@@ -101,3 +101,25 @@ catch(error){
 }
 
 errorMessage()
+
+
+/**
+ * Error Thrown Manually → Caught
+ */
+
+async function isValidUser(value){
+    try{
+
+        if(!value){
+            throw new Error("User validation failed")
+        }
+
+        console.log("User validation successfully")
+
+    }
+    catch(error){
+        console.log("Caught error:", error.message)
+
+    }
+}
+isValidUser(true)
