@@ -122,7 +122,7 @@ async function isValidUser(value){
 
     }
 }
-isValidUser(true)
+isValidUser(false)
 
 
 /**
@@ -140,3 +140,68 @@ async function simpleTask(){
 }
 
 simpleTask()
+
+/**
+ * ASYNC ERROR (Rejected Promise)
+ * Rejected promises are automatically converted into thrown errors when using await.
+ */
+
+function fetchData(){
+ return new Promise((reject)=>{
+      reject("Network Error while fetch data")
+ })
+}
+
+async function loadData(){
+    try{
+
+        const result = await fetchData()
+        console.log(result)
+
+    }
+    catch(error){
+      console.log("Caught error:", error)
+    }
+}
+
+loadData()
+
+
+/**
+ * MULTIPLE STEPS – ERROR STOPS FLOW
+ * Once an error occurs, everything after it in try is skipped.
+ * 
+ * async function always returns a Promise
+ * await pauses only the current function
+ * Rejected promise = thrown error
+ * catch handles:thrown errors, rejected promises
+ * After an error, remaining try code does NOT run
+ */
+
+
+function stepOne(){
+    return Promise.resolve("Step 1 completed")
+}
+
+function stepTwo(){
+    return Promise.reject("Step 2 failed")
+}
+
+async function processStep(){
+
+    try {
+const step1 = await stepOne()
+    console.log(step1)
+
+    const step2 = await stepTwo()
+    console.log(step2)
+
+    console.log("This step not execute after promise rejected")
+    }
+    catch(error){
+    console.log("Caught Error:", error)
+    }
+    
+}
+
+processStep()
