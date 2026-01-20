@@ -123,3 +123,20 @@ async function isValidUser(value){
     }
 }
 isValidUser(true)
+
+
+/**
+ * 
+ */
+
+async function simpleTask(){
+    try{
+       console.log("Task completed")
+    }
+    catch(error){
+      console.log(error.message)
+    }
+
+}
+
+simpleTask()
