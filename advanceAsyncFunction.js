@@ -50,3 +50,23 @@ runParellel()
  */
 
 
+function page1(){
+    return Promise.resolve("Page1 load successfully")
+}
+
+function page2(){
+    return Promise.reject("Page 2 not load due to network issue..")
+}
+
+async function pageLoadEvent(){
+    try{
+        const page = await Promise.all([page1(),page2()])
+        console.log(page)
+
+    }
+    catch(error){
+       console.log("Error", error)
+    }
+}
+
+pageLoadEvent()
