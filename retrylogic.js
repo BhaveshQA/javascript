@@ -22,7 +22,7 @@ Network is flaky
 Example: Retry an async operation 3 times
  */
 
-let attempt = 0
+/* let attempt = 0
 
 function flakyTest(){
     return new Promise((resolve,reject)=>{
@@ -46,6 +46,7 @@ async function retryattempt(){
       }
       catch(error){
         console.log(`No of attempt ${i} and ` + error)
+        await delay(1000)
 
       }
     }
@@ -53,3 +54,75 @@ async function retryattempt(){
 }
 
 retryattempt()
+
+
+/**
+ * LEVEL 2: Retry with DELAY (More realistic)
+   Add wait between retries
+ */
+
+
+   function delay(milisecond){
+     return new Promise((resolve)=>{
+        setTimeout(resolve,milisecond)
+     })
+   } 
+
+
+ /**
+  * Retry with THROW after max attempts
+    Fail test properly if retries exhausted
+  *  */  
+
+
+    // retry function
+
+
+function delay(milisecond){
+     return new Promise((resolve)=>{
+        setTimeout(resolve,milisecond)
+     })
+   } 
+
+let attempts = 0
+
+function flakyTest(){
+    return new Promise((resolve,reject)=>{
+        attempts++
+        if(attempts <=3){
+            reject("api falied")
+        }
+        else
+        {
+            resolve("API success")
+        }
+    })
+}
+
+    async function retryMaxAttempt(){
+        for(let j =1; j<=3;j++){
+            try{
+
+                const result = await flakyTest();
+                console.log(result)
+                return 
+            }catch(error){
+                console.log(`No of attempt ${j} and ` + error)
+                if(j===3){
+                    throw new Error("failed after max attempt")
+                }
+                await delay(1000)
+
+            }
+        }
+    }
+
+  async  function test(){
+        try {
+       const result = await retryMaxAttempt();
+       console.log(result);
+           } catch (error) {
+            console.log("Final failure:", error.message);
+     }
+    }
+test()
