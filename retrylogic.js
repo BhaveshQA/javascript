@@ -126,3 +126,24 @@ function flakyTest(){
      }
     }
 test()
+
+
+/**
+ * framework level retry function, where we pass the function name, max no retry and delay in miliseconds
+ */
+
+
+async function retrycall(fn, retry=3, delay = 1000) {
+
+    for(let i=0; i<retry; i++){
+        try{
+            return await fn()
+        }
+        catch(error){
+            if(i===retry){
+                throw Error()
+            }
+        }
+    }
+
+}
