@@ -22,7 +22,7 @@ Network is flaky
 Example: Retry an async operation 3 times
  */
 
-/* let attempt = 0
+let attempt = 0
 
 function flakyTest(){
     return new Promise((resolve,reject)=>{
@@ -133,17 +133,40 @@ test()
  */
 
 
-async function retrycall(fn, retry=3, delay = 1000) {
+async function retrycall(fn, retry=3, wait = 1000) {
 
     for(let i=0; i<retry; i++){
         try{
             return await fn()
         }
         catch(error){
-            if(i===retry){
-                throw Error()
+            if(i===retry-1){
+                throw error
             }
+            console.log("Retry attempt and failed", i)
+            await delay(wait)
         }
     }
 
 }
+
+async function clickLoginButton() {
+    // simulate flaky UI
+    if (Math.random() < 0.7) {
+        throw new Error("Button not clickable");
+    }
+    return "Clicked";
+}
+
+ 
+ 
+async function runTest() {
+    try {
+        const result = await retrycall(clickLoginButton, 5, 1000);
+        console.log("Success:", result);
+    } catch (error) {
+        console.log("Final failure:", error.message);
+    }
+}
+
+runTest()
